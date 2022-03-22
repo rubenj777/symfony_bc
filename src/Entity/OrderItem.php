@@ -28,7 +28,7 @@ class OrderItem
     private $order_object;
 
     /**
-     * @ORM\OneToOne(targetEntity=product::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=product::class, inversedBy="orderItems")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
