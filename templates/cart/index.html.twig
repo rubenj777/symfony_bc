@@ -49,7 +49,7 @@
                     {% for address in app.user.addresses %}
                         <div class="card m-2 p-2">
                             <p>{{ address.number }} {{ address.street }}, {{ address.zipcode }} {{ address.city }}</p>
-                            <a href="#" class="btn btn-success">send to this address</a>
+                            <a href="{{ path('order', {id:address.id}) }}" class="btn btn-success">send to this address</a>
                         </div>
                     {% endfor %}
                 {% endif %}
