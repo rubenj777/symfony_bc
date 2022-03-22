@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+
+        <div class="row">
+            <div class="col-2">
+                <div class="mt-5 mb-5">
+                    <a href="{{ path('app_home') }}" class="btn btn-primary">Back</a>
+                </div>
+            </div>
+            <div class="col-10 mt-5">
+                <div class="card mb-5">
+                    <div class="card">
+                        <p><strong class="card-text">{{ product.name }}</strong></p>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text">{{ product.price }}</p>
+                        <a href="{{ path('delete_product', {id:product.id}) }}">supprimer le produit</a>
+                        <a href="{{ path('edit_product', {id:product.id}) }}">éditer le produit</a>
+                        <div>
+                            <a href="{{ path('like_product', {id:product.id}) }}" class="like me-2 btn btn-{% if product.isLikedBy(app.user) %}success{% else %}secondary{% endif %}">like <span class="count">{{ product.likes|length }}</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="mt-2 col-4">
+                        {% if app.user %}
+                            {{ form_start(form, {'action':path('new_comment', {id:product.id}) }) }}
+                            {{ form_widget(form.content, {'attr': {'placeholder': 'Donnez votre avis !'}}) }}
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                            </div>
+                            {{ form_end(form) }}
+                        {% endif %}
+                    </div>
+                    <div class="col-8 mt-2">
+                        {% for comment in product.comments %}
+                            <div class="card mb-3">
+                                <div class="card-header d-flex justify-content-between">
+                                    {{ comment.user.username }}
+
+
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">{{ comment.content }}</p>
+                                </div>
+                                <div>
+                                    <a href="{{ path('like_comment', {id:comment.id}) }}" class="like me-2 btn btn-{% if comment.isLikedBy(app.user) %}success{% else %}secondary{% endif %}">like <span class="count">{{ comment.likes|length }}</span></a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+{% endblock %}
