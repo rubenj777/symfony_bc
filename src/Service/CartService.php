@@ -125,8 +125,6 @@ class CartService
      */
     public function emptyCart()
     {
-        $this->manager->remove($this->isInDatabase());
-        $this->manager->flush();
         $this->session->remove('cart');
     }
 
