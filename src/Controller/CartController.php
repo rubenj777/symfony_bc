@@ -37,7 +37,7 @@ class CartController extends AbstractController
         if($product) {
             $service->add($product);
 
-            $cart = $service->isInDb();
+            $cart = $service->isInDatabase();
             if(!$cart) {
                 $cart = new Cart();
                 if($this->getUser()) {
@@ -51,7 +51,7 @@ class CartController extends AbstractController
             $manager->persist($cart);
             $manager->flush();
         }
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('cart');
     }
 
     /**
