@@ -9,7 +9,7 @@
         <div class="card w-50">
 
             <p>delivery address : {{ order.address.number }} {{ order.address.street }} {{ order.address.city }} {{ order.address.zipcode }}</p>
-            <p>ordered : {{ order.createdAt|date('d-m-Y') }}</p>
+            <p>ordered : {{ order.createdAt|date('d-m-Y, H:i') }}</p>
             <p>total : {{ order.total }}€</p>
             <p>status :</p>
             {% if not order.status %}
@@ -17,17 +17,17 @@
                     <p>waiting</p>
                 </div>
             {% endif %}
+            {% for orderItem in order.orderItems %}
 
+                <div class="card w-50">
+
+                    <p>{{ orderItem.product.name }} x{{ orderItem.quantity }}</p>
+
+                </div>
+
+            {% endfor %}
         </div>
 
-        {#{% for orderItem in order.orderItems %}
 
-            <div class="card w-50">
-
-                <p>{{ orderItem.product.name }} x{{ orderItem.quantity }}</p>
-
-            </div>
-
-        {% endfor %}#}
     {% endfor %}
 {% endblock %}
