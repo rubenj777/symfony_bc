@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Address;
 use App\Entity\Order;
+use App\Entity\OrderItem;
 use App\Repository\OrderRepository;
 use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,12 +29,20 @@ class OrderController extends AbstractController
         $order->setCreatedAt(new \DateTimeImmutable());
         $order->setTotal($service->getTotal());
 
+        foreach($service->getCart() as $item) {
+            $orderItem = new OrderItem();
+            $orderItem->setProduct($item['product']);
+            $orderItem->setQuantity($item['qty']);
+            $orderItem->setOrderObject($order);
+            $manager->persist($orderItem);
+        }
+
         $manager->persist($order);
         $manager->flush();
 
         $service->emptyCart();
 
-        return $this->redirectToRoute('cart');
+        return $this->redirectToRoute('orders');
     }
 
     /**

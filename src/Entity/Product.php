@@ -49,6 +49,7 @@ class Product
      */
     private $likes;
 
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
