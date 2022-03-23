@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Nîmes'alerie{% endblock %}
+
+{% block body %}
+
+    <div class="row justify-content-center">
+
+        {% for product in products %}
+            <div class="card m-3 p-3 col-2">
+                <h3 class="card-header">{{ product.name }}</h3>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.price }} €</h5>
+                </div>
+                <div>
+                    <a href="{{ path('show_product', {id:product.id}) }}" class="btn btn-primary">Voir le produit</a>
+                    <a href="{{ path('cart_add', {id:product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
