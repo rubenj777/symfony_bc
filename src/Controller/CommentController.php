@@ -35,5 +35,4 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('show_product', ['id'=>$product->getId()]);
         }
     }
-
 }

@@ -10,10 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
+
 {
     /**
      * @Route("/cart", name="cart")
@@ -92,5 +92,4 @@ class CartController extends AbstractController
         $service->emptyCart();
         return $this->redirectToRoute('app_home');
     }
-
 }
