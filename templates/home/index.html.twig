@@ -11,6 +11,7 @@
                 <h3 class="">{{ product.name }}</h3>
                 <p><strong>Catégorie : {{ product.category.name }}</strong></p>
                 <div class="card-body">
+                    <img src="{{ vich_uploader_asset(product, 'imageFile') }}" style="width:150px">
                     <h5 class="card-title">{{ product.price }} €</h5>
                 </div>
                 <div class="d-flex">
