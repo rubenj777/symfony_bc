@@ -49,6 +49,12 @@ class Product
      */
     private $likes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
 
     public function __construct()
     {
@@ -181,6 +187,18 @@ class Product
             }
         }
         return false;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
 }
