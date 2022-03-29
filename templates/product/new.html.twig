@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New message{% endblock %}
+{% block title %}Nouveau produit{% endblock %}
 
 {% block body %}
 
@@ -31,6 +31,10 @@
                     {{ form_errors(form.price) }}
                     {{ form_widget(form.price, {'attr': {'placeholder':'Prix'}}) }}
                     {{ form_help(form.price) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_row(form.category) }}
                 </div>
 
 

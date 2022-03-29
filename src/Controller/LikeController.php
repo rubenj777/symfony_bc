@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LikeController extends AbstractController
 {
     /**
-     * @Route("/product/like/{id}", name="like_product")
+     * @Route("/like/product/{id}", name="like_product")
      * @param EntityManagerInterface $manager
      * @param Product $product
      * @param LikeRepository $repo
@@ -48,7 +48,7 @@ class LikeController extends AbstractController
     }
 
     /**
-     * @Route("/comment/like/{id}", name="like_comment")
+     * @Route("/like/comment/{id}", name="like_comment")
      * @param EntityManagerInterface $manager
      * @param Comment $comment
      * @param LikeRepository $repo

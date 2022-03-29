@@ -42,7 +42,7 @@ class ProductController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($product);
             $manager->flush();
-            $this->addFlash('info', 'your message has been posted');
+            $this->addFlash('info', 'Le produit a bien été ajouté');
             return $this->redirectToRoute('app_home');
         }
         return $this->renderForm('product/new.html.twig', ['form'=>$form]);
