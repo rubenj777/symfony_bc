@@ -4,31 +4,20 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="col-2">
-            <div class="mt-5 mb-5">
-                <a href="{{ path('app_home') }}" class="btn btn-primary">Back</a>
-            </div>
-        </div>
-        <div class="col-10 mt-5">
-            <div class="card mb-5">
-                <div class="card">
-                    <p><strong class="card-text">{{ product.name }}</strong></p>
-                    <img src="{{ vich_uploader_asset(product, 'imageFile') }}" style="width:150px">
-                    <p class="card-text">{{ product.description }}</p>
-                    <p class="card-text">{{ product.price }}</p>
-                    <a href="{{ path('delete_product', {id:product.id}) }}">supprimer le produit</a>
-                    <a href="{{ path('edit_product', {id:product.id}) }}">éditer le produit</a>
-                    <div>
-                        <a href="{{ path('like_product', {id:product.id}) }}" class="like me-2 btn btn-{% if product.isLikedBy(app.user) %}success{% else %}secondary{% endif %}">like <span class="count">{{ product.likes|length }}</span></a>
-                    </div>
-                </div>
-            </div>
+    <div class="row mt-5">
 
-            <div class="row">
-                <div class="mt-2 col-4">
+        <div class="col-2">
+                <a href="{{ path('app_home') }}" class="btn btn-primary">Retour</a>
+        </div>
+
+        <div class="col-10 row">
+
+            <div class="col-6">
+                <img src="{{ vich_uploader_asset(product, 'imageFile') }}" style="width:250px">
+                <div class="mt-2 d-flex">
                     {% if app.user %}
                         {{ form_start(form, {'action':path('new_comment', {id:product.id}) }) }}
+                        {{ form_widget(form.title, {'attr': {'placeholder': 'Titre de l\'avis'}}) }}
                         {{ form_widget(form.content, {'attr': {'placeholder': 'Donnez votre avis !'}}) }}
                         <div class="mt-2">
                             <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -36,13 +25,12 @@
                         {{ form_end(form) }}
                     {% endif %}
                 </div>
-                <div class="col-8 mt-2">
+
+                <div>
                     {% for comment in product.comments %}
                         <div class="card mb-3">
                             <div class="card-header d-flex justify-content-between">
                                 {{ comment.user.username }}
-
-
                             </div>
                             <div class="card-body">
                                 <p class="card-text">{{ comment.content }}</p>
@@ -53,12 +41,19 @@
                         </div>
                     {% endfor %}
                 </div>
-
             </div>
 
-
+            <div class="col-6">
+                <p><strong class="card-text">{{ product.name }}</strong></p>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text">{{ product.price }}€</p>
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <a href="{{ path('delete_product', {id:product.id}) }}">supprimer le produit</a>
+                    <a href="{{ path('edit_product', {id:product.id}) }}">éditer le produit</a>
+                {% endif %}
+                <a href="{{ path('cart_add', {id:product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+                <a href="{{ path('like_product', {id:product.id}) }}" class="like me-2 btn btn-{% if product.isLikedBy(app.user) %}success{% else %}secondary{% endif %}">J'aime <span class="count">{{ product.likes|length }}</span></a>
+            </div>
         </div>
     </div>
-
-
 {% endblock %}

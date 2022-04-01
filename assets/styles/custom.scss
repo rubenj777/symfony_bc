@@ -1,3 +1,120 @@
-img {
-  width:50px;
+// general
+
+body {
+  font-family: Roboto, serif;
 }
+
+.arvo {
+  font-family: Arvo, serif;
+  font-weight: bolder;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+// navbar
+
+#logo-btn {
+  font-family: Arvo, serif;
+  font-weight: bolder;
+}
+
+#logo {
+  width:25px;
+  object-fit: contain;
+}
+
+.btn-nav {
+  color: #498c8a !important;
+  :hover {
+    color: #ffad4e !important;
+  }
+}
+
+.fas {
+  margin:0 !important;
+}
+
+.fas-nav {
+}
+
+//home
+
+#starship-btn {
+  background: #EFEFEF;
+  color:black;
+  :hover {
+    background: #498c8a;
+    color: white;
+    transition-duration: 50ms;
+  }
+}
+
+//carousel
+
+#div-carousel {
+  display: flex;
+  justify-content: center;
+}
+
+#wrapper {
+  width: 100%;
+  position: relative;
+}
+
+#carousel {
+  overflow: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+#carousel::-webkit-scrollbar {
+  height: 0;
+}
+
+#prev,
+#next {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: white;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  outline: 0;
+  cursor: pointer;
+  position: absolute;
+}
+
+#prev {
+  top: 50%;
+  left: 0;
+  transform: translate(50%, -50%);
+  display: none;
+}
+
+#next {
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+
+#content {
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-flow: column;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.item {
+  width: 180px;
+  height: 180px;
+  background: green;
+}
+

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les commandes{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-2">
+                <a href="{{ path('admin') }}" class="btn btn-primary">Retour</a>
+        </div>
+
+    <div class="col-10 w-50">
+        <h2>Liste des commandes</h2>
+        {% for order in orders %}
+            <div class="card p-2">
+                <p>Date de la commande : {{ order.createdAt|date('d-m-Y, H:i') }}</p>
+                <p>Adresse de livraison : {{ order.address.number }} {{ order.address.street }}, {{ order.address.city }} {{ order.address.zipcode }}</p>
+                <p>Total : {{ order.total }}€</p>
+                <p>Contenu de la commande :</p>
+                <ul>
+                    {% for orderItem in order.orderItems %}
+                        <li>{{ orderItem.product.name }} x{{ orderItem.quantity }}</li>
+                    {% endfor %}
+                </ul>
+                <p>Statut de la commande :</p>
+                {% if not order.status %}
+                    <div class="alert alert-primary">
+                        <p>En attente d'expédition</p>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

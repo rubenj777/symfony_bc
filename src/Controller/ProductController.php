@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Product;
+use App\Form\CategoryType;
 use App\Form\CommentType;
 use App\Form\ProductType;
+use Doctrine\Common\Annotations\Annotation\Required;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,7 +31,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/new", name="new_product", priority="2")
+     * @Route("/admin/product/new", name="new_product", priority="2")
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @return Response
@@ -50,7 +53,7 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route("/product/delete/{id}", name="delete_product")
+     * @Route("/admin/product/delete/{id}", name="delete_product")
      * @param EntityManagerInterface $manager
      * @param Product|null $product
      * @return RedirectResponse
@@ -63,7 +66,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/edit/{id}", name="edit_product")
+     * @Route("/admin/product/edit/{id}", name="edit_product")
      * @param Product $product
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -79,5 +82,25 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('show_product', ['id'=>$product->getId()]);
         }
         return $this->renderForm('product/new.html.twig', ['form'=>$form]);
+    }
+
+    /**
+     * @Route("/admin/category/new", name="new_category")
+     * @param Category $category
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return RedirectResponse|Response
+     */
+    public function newCategory(Request $request, EntityManagerInterface $manager)
+    {
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($category);
+            $manager->flush();
+            return $this->redirectToRoute('admin');
+        }
+        return $this->renderForm('product/category.html.twig', ['form'=>$form]);
     }
 }
