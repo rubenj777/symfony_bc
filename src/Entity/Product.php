@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -20,42 +22,50 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"products-read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products-read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="decimal", precision=20, scale=2)
+     * @Groups({"products-read"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"products-read"})
      */
     private $isActive;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"products-read"})
      */
     private $description;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="product", orphanRemoval=true)
+     * @Groups({"products-read"})
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="product")
+     * @Groups({"products-read"})
      */
     private $likes;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="product")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"products-read"})
      */
     private $category;
 
@@ -65,13 +75,16 @@ class Product
      * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File|null
+     * @Groups({"products-read"})
      */
     private $imageFile;
 
     /**
      * @ORM\Column(type="string")
      *
+     *
      * @var string|null
+     * @Groups({"products-read"})
      */
     private $imageName;
 
@@ -85,7 +98,7 @@ class Product
     /**
      * @ORM\Column(type="datetime")
      *
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $updatedAt;
 

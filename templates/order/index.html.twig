@@ -1,32 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OrderController!{% endblock %}
+{% block title %}Mes commandes{% endblock %}
 
 {% block body %}
 
-
     {% for order in orders %}
-        <div class="card w-50">
+        {% if order is null %}
+            <div>
+                <p>Vous n'avez passé aucune commande !</p>
+            </div>
+        {% else %}
+            <div class="card w-50">
 
-            <p>delivery address : {{ order.address.number }} {{ order.address.street }} {{ order.address.city }} {{ order.address.zipcode }}</p>
-            <p>ordered : {{ order.createdAt|date('d-m-Y, H:i') }}</p>
-            <p>total : {{ order.total }}€</p>
-            <p>status :</p>
-            {% if not order.status %}
-                <div class="alert alert-primary">
-                    <p>waiting</p>
-                </div>
-            {% endif %}
-            {% for orderItem in order.orderItems %}
+                <p>delivery address : {{ order.address.number }} {{ order.address.street }} {{ order.address.city }} {{ order.address.zipcode }}</p>
+                <p>ordered : {{ order.createdAt|date('d-m-Y, H:i') }}</p>
+                <p>total : {{ order.total }}€</p>
+                <p>status :</p>
+                {% if not order.status %}
+                    <div class="alert alert-primary">
+                        <p>waiting</p>
+                    </div>
+                {% endif %}
+                {% for orderItem in order.orderItems %}
 
-                <div class="card w-50">
+                    <div class="card w-50">
 
-                    <p>{{ orderItem.product.name }} x{{ orderItem.quantity }}</p>
+                        <p>{{ orderItem.product.name }} x{{ orderItem.quantity }}</p>
 
-                </div>
+                    </div>
 
-            {% endfor %}
-        </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
 
     {% endfor %}

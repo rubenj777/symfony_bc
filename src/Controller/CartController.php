@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Entity\Product;
+use App\Entity\User;
 use App\Repository\AddressRepository;
 use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +33,7 @@ class CartController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return RedirectResponse
      */
-    public function add(Product $product,CartService $service, EntityManagerInterface $manager): RedirectResponse
+    public function add(Product $product, CartService $service, EntityManagerInterface $manager): RedirectResponse
     {
         if($product) {
             $service->add($product);

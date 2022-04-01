@@ -143,8 +143,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/lexik/jwt-authentication-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/vich/uploader-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jms/metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nelmio/cors-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="06b712a2cc" level="application" />
   </component>
 </module>
