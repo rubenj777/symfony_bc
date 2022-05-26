@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Entity\Order;
 use App\Entity\OrderItem;
+use App\Repository\OrderRepository;
 use App\Service\CartService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,4 +53,6 @@ class OrderController extends AbstractController
     {
         return $this->render('order/index.html.twig', ['orders'=>$this->getUser()->getOrders()]);
     }
+
+
 }

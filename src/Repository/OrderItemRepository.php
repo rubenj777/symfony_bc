@@ -45,22 +45,24 @@ class OrderItemRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return OrderItem[] Returns an array of OrderItem objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return OrderItem[] Returns an array of OrderItem objects
+     */
+
+    public function findMostSold(): array
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+//            ->andWhere('o.product_id')
+//            ->groupBy('product_id')
+//            ->andWhere('o.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('o.id', 'ASC')
+//            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?OrderItem

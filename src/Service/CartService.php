@@ -5,6 +5,7 @@ namespace App\Service;
 
 use App\Entity\Cart;
 use App\Entity\Product;
+use App\Entity\User;
 use App\Repository\CartRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ class CartService
     private $repo;
     private $cartRepo;
     private $manager;
+
 
     /**
      * @param ProductRepository $repo
@@ -36,6 +38,7 @@ class CartService
      */
     public function getCart(): array
     {
+
         $cart = $this->session->get('cart', []);
         $data = [];
 

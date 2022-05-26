@@ -16,14 +16,14 @@ class Like
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="likes")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $user;
 

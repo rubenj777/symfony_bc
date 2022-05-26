@@ -22,50 +22,50 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="decimal", precision=20, scale=2)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $isActive;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $description;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="product", orphanRemoval=true)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $comments;
 
     /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="product")
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $likes;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="product")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $category;
 
@@ -75,7 +75,7 @@ class Product
      * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File|null
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $imageFile;
 
@@ -84,7 +84,7 @@ class Product
      *
      *
      * @var string|null
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $imageName;
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CartRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,8 @@ class Cart
      * @ORM\Column(type="string", length=255)
      */
     private $session_id;
+
+
 
     public function getId(): ?int
     {
@@ -89,4 +93,6 @@ class Cart
 
         return $this;
     }
+
+
 }

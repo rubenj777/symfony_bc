@@ -39,6 +39,7 @@ class CartController extends AbstractController
             $service->add($product);
 
             $cart = $service->isInDatabase();
+           // dd($cart);
             if(!$cart) {
                 $cart = new Cart();
                 if($this->getUser()) {
@@ -46,6 +47,7 @@ class CartController extends AbstractController
                 }
                 $cart->setSessionId($service->getSessionId());
             }
+
 
             $cart->setCreatedAt(new \DateTimeImmutable());
             $cart->setTotal($service->getTotal());

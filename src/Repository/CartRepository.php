@@ -45,6 +45,29 @@ class CartRepository extends ServiceEntityRepository
         }
     }
 
+    public function findFromDateToDate($begin, $end)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.created_at > :begin')
+            ->setParameter('begin', $begin)
+            ->andWhere('c.created_at < :end')
+            ->setParameter('end', $end)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function getAvg()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('avg(c.total) as avg')
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
     // /**
     //  * @return Cart[] Returns an array of Cart objects
     //  */
