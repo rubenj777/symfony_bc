@@ -39,6 +39,19 @@ class Product
     private $price;
 
     /**
+     * @ORM\Column(type="string")
+     * @Groups({"products:read"})
+     */
+    private $brand;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"products:read"})
+     */
+    private $quantity;
+
+
+    /**
      * @ORM\Column(type="boolean")
      * @Groups({"products:read"})
      */
@@ -101,6 +114,11 @@ class Product
      * @var DateTimeInterface|null
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=SubCategory::class, inversedBy="products")
+     */
+    private $SubCategory;
 
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
@@ -179,6 +197,30 @@ class Product
     public function setPrice(string $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): self
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?string
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }
@@ -289,6 +331,18 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSubCategory(): ?SubCategory
+    {
+        return $this->SubCategory;
+    }
+
+    public function setSubCategory(?SubCategory $SubCategory): self
+    {
+        $this->SubCategory = $SubCategory;
 
         return $this;
     }

@@ -27,13 +27,29 @@
                 </div>
 
                 <div class="mb-3">
+                    {{ form_errors(form.brand) }}
+                    {{ form_widget(form.brand, {'attr': {'placeholder':'Marque du produit'}}) }}
+                    {{ form_help(form.brand) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_errors(form.quantity) }}
+                    {{ form_widget(form.quantity, {'attr': {'placeholder':'Quantité'}}) }}
+                    {{ form_help(form.quantity) }}
+                </div>
+
+                <div class="mb-3">
                     {{ form_errors(form.price) }}
                     {{ form_widget(form.price, {'attr': {'placeholder':'Prix'}}) }}
                     {{ form_help(form.price) }}
                 </div>
 
+{#                <div class="mb-3">#}
+{#                    {{ form_widget(form.category) }}#}
+{#                </div>#}
+
                 <div class="mb-3">
-                    {{ form_widget(form.category) }}
+                    {{ form_widget(form.subcategory) }}
                 </div>
 
                 <div class="mb-3">
