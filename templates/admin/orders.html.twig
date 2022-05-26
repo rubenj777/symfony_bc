@@ -9,9 +9,10 @@
         </div>
 
     <div class="col-10 w-50">
-        <h2>Liste des commandes</h2>
+        <h2>Toutes les commandes</h2>
         {% for order in orders %}
             <div class="card p-2">
+                <p>Client : {{ order.user.username }}</p>
                 <p>Date de la commande : {{ order.createdAt|date('d-m-Y, H:i') }}</p>
                 <p>Adresse de livraison : {{ order.address.number }} {{ order.address.street }}, {{ order.address.city }} {{ order.address.zipcode }}</p>
                 <p>Total : {{ order.total }}€</p>
@@ -24,7 +25,14 @@
                 <p>Statut de la commande :</p>
                 {% if not order.status %}
                     <div class="alert alert-primary">
-                        <p>En attente d'expédition</p>
+                        <p class="m-0">En attente d'expédition</p>
+
+                        <button><a href="{{ path('change_status', {id: order.id}) }}">Envoyer la commande</a></button>
+                    </div>
+                {% endif %}
+                {% if order.status == 1 %}
+                    <div class="alert alert-success">
+                        <p class="m-0">Expédiée</p>
                     </div>
                 {% endif %}
             </div>

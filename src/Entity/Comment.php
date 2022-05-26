@@ -17,19 +17,19 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $content;
 
@@ -42,7 +42,7 @@ class Comment
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"products-read"})
+     * @Groups({"products:read"})
      */
     private $user;
 

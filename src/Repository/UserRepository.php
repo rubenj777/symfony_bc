@@ -62,6 +62,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+
+    public function findFromDateToDate($begin, $end)
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u.id')
+            ->where('u.created_at > :begin')
+            ->setParameter('begin', $begin)
+            ->andWhere('u.created_at < :end')
+            ->setParameter('end', $end)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

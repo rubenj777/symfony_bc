@@ -45,6 +45,18 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
+    public function findFromDateToDate($begin, $end)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.created_at > :begin')
+            ->setParameter('begin', $begin)
+            ->andWhere('o.created_at < :end')
+            ->setParameter('end', $end)
+            ->orderBy('o.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */

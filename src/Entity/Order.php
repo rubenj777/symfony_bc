@@ -27,7 +27,7 @@ class Order
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=address::class)
+     * @ORM\ManyToOne(targetEntity=Address::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;

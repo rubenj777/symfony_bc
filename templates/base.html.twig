@@ -27,10 +27,7 @@
     {% endblock %}
 </head>
 
-
-
-
-
+<body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -47,8 +44,9 @@
                 {% if app.user %}
                     {% if 'ROLE_ADMIN' in app.user.roles %}
                         <a href="{{ path('admin') }}" class="btn btn-nav fas-nav"><i class="fas fa-user-cog"></i></a>
+                    {% elseif 'ROLE_USER' in app.user.roles %}
+                        <a href="{{ path('profile') }}" class="btn btn-nav fas-nav"><i class="fas fa-user ms-4" id="user"></i></a>
                     {% endif %}
-                    <a href="{{ path('profile') }}" class="btn btn-nav fas-nav"><i class="fas fa-user ms-4" id="user"></i></a>
                     <a href="{{ path('logout') }}" class="btn btn-nav fas-nav"><i class="fas fa-sign-out-alt"></i></a>
                 {% else %}
                     <a href="{{ path('login') }}" class="btn">Connexion</a>
@@ -58,19 +56,72 @@
         </div>
     </nav>
     <nav class="container d-none d-md-flex justify-content-md-between">
-        <a href="#" class="btn-nav">Chiens</a>
-        <a href="#" class="btn-nav">Chats</a>
-        <a href="#" class="btn-nav">Animaux exotiques</a>
-        <a href="#" class="btn-nav">Promotions</a>
-        <a href="#" class="btn-nav">Nouveautés</a>
-        <a href="#" class="btn-nav">Votre animal dans l'espace !</a>
+        {% for category in cats.getCategories %}
+            <a href="#" class="btn-nav">{{ category.name }}</a>
+        {% endfor %}
     </nav>
 </header>
 
+<main>
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+</main>
 
-<body>
-<div class="container">
-    {% block body %}{% endblock %}
-</div>
+
+<footer class="mt-5 p-5">
+    <div class="container">
+        <div class="row flex-wrap-reverse">
+            <ul class="col-12 col-md-3 mt-3 my-md-0 text-center text-md-start" style="list-style: none">
+                <li><h3><a href="#">Aides & informations</a></h3></li>
+                <li><a href="#">Assistance</a></li>
+                <li><a href="#">Suivi commande</a></li>
+                <li><a href="#">Livraison & retour</a></li>
+                <li><a href="#">Assurance décès</a></li>
+            </ul>
+
+            <ul class="col-12 col-md-3 my-3 my-md-0 text-center text-md-start" style="list-style: none">
+                <li><h3><a href="#">Nos engagements</a></h3></li>
+                <li><a href="#">Gestion des cookies</a></li>
+                <li><a href="#">Engagements et qualités</a></li>
+                <li><a href="#">Données personnelles et sécurité</a></li>
+                <li><a href="#">Partenaires</a></li>
+            </ul>
+
+            <ul class="col-12 col-md-3 mt-3 my-md-0 text-center text-md-start" style="list-style:none">
+                <li>La Nîmes'alerie sur les réseaux</li>
+                <li>
+                    <div class="d-flex">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </li>
+
+            </ul>
+
+            <!---------------- DEBUT FORM --------------->
+            <form
+                    action=""
+                    class="col-12 col-md-3 my-3 my-md-0 text-center text-md-start"
+            >
+                <legend>
+                    Inscrivez-vous à notre newsletter pour connaître toutes les
+                    mises à jour, les offres spéciales et les dernières nouveautés !
+                </legend>
+                <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Votre adresse e-mail"
+                />
+            </form>
+            <!---------------- FIN FORM --------------->
+        </div>
+        <!--------------- div .row -------------->
+    </div>
+    <!------------- div .container ------------>
+</footer>
+
 </body>
 </html>

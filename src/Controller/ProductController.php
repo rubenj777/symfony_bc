@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Product;
+use App\Entity\SubCategory;
 use App\Form\CategoryType;
 use App\Form\CommentType;
 use App\Form\ProductType;
+use App\Form\SubCategoryType;
 use Doctrine\Common\Annotations\Annotation\Required;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -86,7 +88,6 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/admin/category/new", name="new_category")
-     * @param Category $category
      * @param Request $request
      * @param EntityManagerInterface $manager
      * @return RedirectResponse|Response
@@ -98,6 +99,25 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($category);
+            $manager->flush();
+            return $this->redirectToRoute('admin');
+        }
+        return $this->renderForm('product/category.html.twig', ['form'=>$form]);
+    }
+
+    /**
+     * @Route("/admin/subcategory/new", name="new_subcategory")
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return RedirectResponse|Response
+     */
+    public function newSubCategory(Request $request, EntityManagerInterface $manager)
+    {
+        $subcategory = new SubCategory();
+        $form = $this->createForm(SubCategoryType::class, $subcategory);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($subcategory);
             $manager->flush();
             return $this->redirectToRoute('admin');
         }
